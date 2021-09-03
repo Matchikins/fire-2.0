@@ -26,6 +26,8 @@ import com.br.cefops.cefopsBD.Services.UserServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AccountCredentialSignUpVO;
 import com.br.cefops.cefopsBD.data.vo.v1.AccountCredentialsVO;
 import com.br.cefops.cefopsBD.repository.UserRepository;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 
@@ -50,14 +52,16 @@ public class AuthController {
 	@PostMapping(value = "/signin", produces = "application/json", 
 			consumes =  "application/json" )
 	public ResponseEntity signin(@RequestBody AccountCredentialsVO data) {
+		System.out.println(data.getUsername());
 		try {
 			var username = data.getUsername();
 			var pasword = data.getPassword();
 			
+			
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, pasword));
 			
 			var user = repository.findByUsername(username);
-			
+		
 			var token = "";
 			
 			if (user != null) {
@@ -65,13 +69,15 @@ public class AuthController {
 			} else {
 				throw new UsernameNotFoundException("Username " + username + " not found!");
 			}
+			var levelacess=user.getRoles();
 			
 			Map<Object, Object> model = new HashMap<>();
 			model.put("username", username);
+			model.put("role",levelacess );
 			model.put("token", token);
 			return ok(model);
 		} catch (AuthenticationException e) {
-			throw new BadCredentialsException("Invalid username/password !");
+			throw new BadCredentialsException("Invalid username or password !");
 		}
 	}
 	
