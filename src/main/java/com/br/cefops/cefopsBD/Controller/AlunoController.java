@@ -33,7 +33,7 @@ public class AlunoController {
 	@Autowired
 	AlunoServices serviceAlunoServices;
 	
-	
+	@CrossOrigin(origins = "http://localhost:8810")
 	@GetMapping(produces = { "application/json"})
 	public List<Alunos> obterAlunos() {
 		List<Alunos> alunos = alunointerface.findAll();
