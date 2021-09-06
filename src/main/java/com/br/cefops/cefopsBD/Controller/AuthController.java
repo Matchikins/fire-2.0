@@ -72,7 +72,7 @@ public class AuthController {
 			var levelacess=user.getRoles();
 			
 			Map<Object, Object> model = new HashMap<>();
-			model.put("username", username);
+			model.put("userFullName", user.getFullName());
 			model.put("role",levelacess );
 			model.put("token", token);
 			return ok(model);
@@ -91,7 +91,7 @@ public class AuthController {
 			var email=data.getEmail();
 			var password=data.getPassword();
 			var fullname=data.getFullName();
-			BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder(16);
+			BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder(13);
 			var result =bCryptPasswordEncoder.encode(password);
 			if (user.isEmpty()) {
 			throw new BadCredentialsException("Erro ao cadastrar !");
