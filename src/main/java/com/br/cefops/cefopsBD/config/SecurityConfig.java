@@ -3,6 +3,7 @@ package com.br.cefops.cefopsBD.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/auth/signin", "/api-docs/**", "/swagger-ui.html**").permitAll()
 				.antMatchers("/api/v1/**").authenticated()
+				.antMatchers(HttpMethod.GET,"/api/v1/alunos/{id}").hasRole("Aluno")
+				.antMatchers("​/api​/v1​/financa​/**").hasAuthority("ROLE_Financeiro")
 				.antMatchers("/users").denyAll()
 			.and()
 			.apply(new JwtConfigurer(tokenProvider));

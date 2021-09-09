@@ -9,6 +9,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +27,8 @@ import com.br.cefops.cefopsBD.Security.JWT.JwtTokenProvider;
 import com.br.cefops.cefopsBD.Services.UserServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AccountCredentialSignUpVO;
 import com.br.cefops.cefopsBD.data.vo.v1.AccountCredentialsVO;
+import com.br.cefops.cefopsBD.domain.email.Email;
+import com.br.cefops.cefopsBD.domain.email.EmailControll;
 import com.br.cefops.cefopsBD.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -45,9 +49,12 @@ public class AuthController {
 	UserRepository repository;
 	@Autowired
 	UserServices serviceUser;
+	@Autowired
+    Email email;
 
 
-	
+
+   
 	@SuppressWarnings("rawtypes")
 	@PostMapping(value = "/signin", produces = "application/json", 
 			consumes =  "application/json" )
@@ -70,11 +77,15 @@ public class AuthController {
 				throw new UsernameNotFoundException("Username " + username + " not found!");
 			}
 			var levelacess=user.getRoles();
+			var fullNames =user.getFullName();
+			var aluno=user.getAlunos();
+			
 			
 			Map<Object, Object> model = new HashMap<>();
-			model.put("userFullName", user.getFullName());
+			model.put("fullInfo", aluno);
 			model.put("role",levelacess );
 			model.put("token", token);
+			email.sendSimpleMessage("ti.4@gmail.com", "Geremias", "oi testando sa bosta");
 			return ok(model);
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException("Invalid username or password !");

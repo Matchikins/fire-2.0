@@ -3,6 +3,7 @@ package com.br.cefops.cefopsBD.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Endpoint finanças Interna",description = "EndPoint Responsavel Por Controlar o As Finanças internas")
 @RestController
 @CrossOrigin
+@PreAuthorize("hasRole('ROLE_Financeiro')")
 @RequestMapping("/api/v1/financa/interna")
 public class FinanciaInterController {
 	

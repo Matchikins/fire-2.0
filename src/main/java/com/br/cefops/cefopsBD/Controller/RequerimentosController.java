@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,7 @@ public class RequerimentosController {
 	RequerimentInterface requerimento;
 	
 	@ResponseBody
-	@RequestMapping(value = "/requerimetos", method = RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<?> novoRequeri(@RequestBody Requerimentos requeri) {
 		Optional<Requerimentos> optRequerimento = requerimento.findById(requeri.getId());
 		if (optRequerimento.isPresent())
@@ -37,7 +39,7 @@ public class RequerimentosController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(requeri);
 	}
 	
-	@RequestMapping(value = "/requerimetos/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> obterrequerimetosID(@PathVariable Long id) {
 		Optional<Requerimentos> optRequerimento = requerimento.findById(id);
 		if (optRequerimento.isPresent()) {
@@ -45,8 +47,8 @@ public class RequerimentosController {
 		}
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
-	@RequestMapping(value = "/requerimetos", method = RequestMethod.GET)
-	public ResponseEntity<?> obterAlunos() {
+	@GetMapping()
+	public ResponseEntity<?> GetRequeriments() {
 		List<Requerimentos> req = requerimento.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(req);
 	}
