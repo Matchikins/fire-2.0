@@ -1,50 +1,52 @@
 package com.br.cefops.cefopsBD.domain.email;
 
-import java.io.IOException;
-import java.util.Map;
-
-import javax.mail.MessagingException;
-
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Component;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
-@Component
-public class Email  implements  EmailService {
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+@Service
+public class Email  implements  SendMailService {
 	@Autowired
-    private JavaMailSender emailSender;
-	
-	  public void sendSimpleMessage(String to, String subject, String text) {
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("noreply@cefops.net");
-            message.setTo("ti.4@gmail.com");
-            message.setSubject("sdf");
-            message.setText("oi testando sa bosta");
+ JavaMailSender javaMailSender;
 
-            emailSender.send(message);
-        } catch (MailException exception) {
-            exception.printStackTrace();
-        }
-    }
-	@Override
-	public void sendSimpleMessageUsingTemplate(String to, String subject, String... templateModel) {
-		// TODO Auto-generated method stub
-		
-	}
+	    public Email(JavaMailSender javaMailSender) {
+	        this.javaMailSender = javaMailSender;
+	    }
 
-	@Override
-	public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
-		// TODO Auto-generated method stub
-		
-	}
+	    @Override
+	    public void sendMail(Mail mail) {
 
-	@Override
-	public void sendMessageUsingThymeleafTemplate(String to, String subject, Map<String, Object> templateModel)
-			throws IOException, MessagingException {
-		// TODO Auto-generated method stub
-		
-	}
+	        SimpleMailMessage msg = new SimpleMailMessage();
+	        msg.setTo(mail.getRecipient(), mail.getRecipient());
+	        msg.setFrom("noreplay@cefops.com.br");
+
+	        msg.setSubject(mail.getSubject());
+	        msg.setText(mail.getMessage());
+
+	        javaMailSender.send(msg);
+	    }
+
+	    @Override
+	    public void sendMailWithAttachments(Mail mail) throws MessagingException {
+	        MimeMessage msg = javaMailSender.createMimeMessage();
+
+	        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+	        helper.setTo("ti4.eas@gmail.com");
+	        helper.setFrom("noreplay@cefops.com.br");
+	        helper.setSubject("Testing from Spring Boot");
+
+	        helper.setText("Find the attached image", true);
+
+	        helper.addAttachment("ce.png", new ClassPathResource("C:\\Users\\e.dias\\Documents\\projeto cefops\\fire-2.0-main\\ce.png"));
+
+	        javaMailSender.send(msg);
+	    }
 }

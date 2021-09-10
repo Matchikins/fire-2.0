@@ -49,8 +49,7 @@ public class AuthController {
 	UserRepository repository;
 	@Autowired
 	UserServices serviceUser;
-	@Autowired
-    Email email;
+
 
 
 
@@ -85,7 +84,7 @@ public class AuthController {
 			model.put("fullInfo", aluno);
 			model.put("role",levelacess );
 			model.put("token", token);
-			email.sendSimpleMessage("ti.4@gmail.com", "Geremias", "oi testando sa bosta");
+		
 			return ok(model);
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException("Invalid username or password !");
