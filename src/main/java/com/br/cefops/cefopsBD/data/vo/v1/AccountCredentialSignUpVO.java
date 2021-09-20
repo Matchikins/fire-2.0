@@ -17,7 +17,8 @@ private static final long serialVersionUID = 1L;
     @Email(message = "Por Favor Insira Um E-mail Valido !")
 	private String email;
 	@NotEmpty(message = "O Campo Nome Completo não pode ser vazio !")
-	private String fullName;
+	private String fristName;
+	private String lastName;
 	public String getUsername() {
 		return username;
 	}
@@ -36,15 +37,21 @@ private static final long serialVersionUID = 1L;
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getFullName() {
-		return fullName;
+	public String getFristName() {
+		return fristName;
 	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFristName(String fristName) {
+		this.fristName = fristName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, fullName, password, username);
+		return Objects.hash(email, fristName, lastName, password, username);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -55,10 +62,12 @@ private static final long serialVersionUID = 1L;
 		if (getClass() != obj.getClass())
 			return false;
 		AccountCredentialSignUpVO other = (AccountCredentialSignUpVO) obj;
-		return Objects.equals(email, other.email) && Objects.equals(fullName, other.fullName)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
+		return Objects.equals(email, other.email) && Objects.equals(fristName, other.fristName)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
+				&& Objects.equals(username, other.username);
 	}
 
+	
 		
 	
 

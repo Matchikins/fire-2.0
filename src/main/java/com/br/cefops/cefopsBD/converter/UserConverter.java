@@ -13,7 +13,9 @@ public class UserConverter {
 		vo.setEmail(user.getEmail());
 		vo.setPassword(user.getPassword());
 		vo.setUsername(user.getUsername());
-		vo.setFullName(user.getFullName());
+		vo.setFristName(user.getFristName());
+		vo.setLastName(user.getLastName());
+	
 		return vo;
 	}
 	
@@ -22,7 +24,9 @@ public class UserConverter {
 		entityUser.setEmail(vo.getEmail());
 		entityUser.setPassword(vo.getPassword());
 		entityUser.setUserName(vo.getUsername());
-		entityUser.setFullName(vo.getFullName());
+		entityUser.setFristName(vo.getFristName());
+		entityUser.setLastName(vo.getLastName());
+	
 		
 		return entityUser;
 	}

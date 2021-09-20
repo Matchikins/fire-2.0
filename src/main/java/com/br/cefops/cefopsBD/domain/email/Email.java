@@ -22,16 +22,15 @@ public class Email  implements  SendMailService {
 
 	    @Override
 	    public void sendMail(Mail mail) {
-
 	        SimpleMailMessage msg = new SimpleMailMessage();
 	        msg.setTo(mail.getRecipient(), mail.getRecipient());
 	        msg.setFrom("noreplay@cefops.com.br");
-
 	        msg.setSubject(mail.getSubject());
 	        msg.setText(mail.getMessage());
 
 	        javaMailSender.send(msg);
 	    }
+	    
 
 	    @Override
 	    public void sendMailWithAttachments(Mail mail) throws MessagingException {

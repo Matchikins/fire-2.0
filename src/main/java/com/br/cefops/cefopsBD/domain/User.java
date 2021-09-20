@@ -40,11 +40,14 @@ private static final long serialVersionUID = 1L;
 	private Alunos alunos;
 	@Column(name = "user_name", unique = true)
 	private String userName;
-	
-	@Column(name = "full_name")
-	private String fullName;
+	@Column(name = "frist_name")
+	private String fristName;
+	@Column(name = "last_name")
+	private String LastName;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "cpf")
+	private String cpf;
 	
 	@Column(name = "password")
 	private String password;
@@ -115,13 +118,35 @@ private static final long serialVersionUID = 1L;
 		this.userName = userName;
 	}
 
-	public String getFullName() {
-		return fullName;
+	
+
+	public String getFristName() {
+		return fristName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+
+
+
+	public void setFristName(String fristName) {
+		this.fristName = fristName;
 	}
+
+
+
+
+	public String getLastName() {
+		return LastName;
+	}
+
+
+
+
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+
+
 
 	public Boolean getAccountNonExpired() {
 		return accountNonExpired;
@@ -205,10 +230,24 @@ private static final long serialVersionUID = 1L;
 
 
 
+	public String getCpf() {
+		return cpf;
+	}
+
+
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(accountNonExpired, accountNonLocked, alunos, credentialsNonExpired, email, enabled,
-				fullName, id, password, permissions, userName);
+		return Objects.hash(LastName, accountNonExpired, accountNonLocked, alunos, cpf, credentialsNonExpired, email,
+				enabled, fristName, id, password, permissions, userName);
 	}
 
 
@@ -223,14 +262,19 @@ private static final long serialVersionUID = 1L;
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(accountNonExpired, other.accountNonExpired)
+		return Objects.equals(LastName, other.LastName) && Objects.equals(accountNonExpired, other.accountNonExpired)
 				&& Objects.equals(accountNonLocked, other.accountNonLocked) && Objects.equals(alunos, other.alunos)
-				&& Objects.equals(credentialsNonExpired, other.credentialsNonExpired)
+				&& Objects.equals(cpf, other.cpf) && Objects.equals(credentialsNonExpired, other.credentialsNonExpired)
 				&& Objects.equals(email, other.email) && Objects.equals(enabled, other.enabled)
-				&& Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
+				&& Objects.equals(fristName, other.fristName) && Objects.equals(id, other.id)
 				&& Objects.equals(password, other.password) && Objects.equals(permissions, other.permissions)
 				&& Objects.equals(userName, other.userName);
 	}
+
+
+
+
+
 
 
 }

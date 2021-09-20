@@ -76,7 +76,7 @@ public class AuthController {
 				throw new UsernameNotFoundException("Username " + username + " not found!");
 			}
 			var levelacess=user.getRoles();
-			var fullNames =user.getFullName();
+			var fullNames =user.getFristName();
 			var aluno=user.getAlunos();
 			
 			
@@ -100,14 +100,15 @@ public class AuthController {
 			var user =data.getUsername();
 			var email=data.getEmail();
 			var password=data.getPassword();
-			var fullname=data.getFullName();
+			var fristname=data.getFristName();
+			var lastname=data.getLastName();
 			BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder(13);
 			var result =bCryptPasswordEncoder.encode(password);
 			if (user.isEmpty()) {
 			throw new BadCredentialsException("Erro ao cadastrar !");
 		}
 			
-			serviceUser.saveUser(email, result, user, fullname);
+			serviceUser.saveUser(email, result, user, fristname,lastname);
 			
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException("Erro ao cadastrar !");

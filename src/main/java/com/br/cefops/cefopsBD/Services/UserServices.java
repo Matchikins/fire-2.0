@@ -37,14 +37,15 @@ public class UserServices  implements UserDetailsService{
 	}
 
 	
-	public AccountCredentialSignUpVO saveUser( String email,String password,String user, String fullname) {
+	public AccountCredentialSignUpVO saveUser( String email,String password,String user, String fristName,String lastName) {
 		AccountCredentialSignUpVO credential= new AccountCredentialSignUpVO();
 	var entity= converter.convertVoToEntity(credential);
 	Permission permission= repository2.findByName("Aluno");
 	
 	entity.setEmail(email);
 	entity.setPassword(password);
-	entity.setFullName(fullname);
+	entity.setFristName(fristName);
+	entity.setLastName(lastName);
 	entity.setUserName(user);
 	entity.setAccountNonExpired(true);
 	entity.setAccountNonLocked(true);
