@@ -9,5 +9,7 @@ public interface SendMailService {
 
 	    void sendMailWithAttachments(Mail mail) throws MessagingException;
 
+		void sendMailReset(String email, String assunto, String bodString) throws MessagingException;
+
 
 }

@@ -18,6 +18,7 @@ public class TiposRequerimentos {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
+	private String grupo;
 	private Integer diasPentregar;
 	public long getId() {
 		return id;
@@ -36,6 +37,12 @@ public class TiposRequerimentos {
 	}
 	public void setDiasPentregar(Integer diasPentregar) {
 		this.diasPentregar = diasPentregar;
+	}
+	public String getGrupo() {
+		return grupo;
+	}
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 	
 	

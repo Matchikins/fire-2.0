@@ -31,6 +31,12 @@ public class Requerimentos implements Serializable {
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	  @JoinColumn(name = "aluno_id")
 		private Alunos aluno;
+	private Date AbertoEm;
+	private Boolean Concluido;
+	private String Status;
+	private String Responsavel;
+
+	
 	
 	@ManyToOne()
 	  @JoinColumn(name = "tiporequerimento_id")
@@ -72,6 +78,41 @@ public class Requerimentos implements Serializable {
 	public void setTipo(TiposRequerimentos tipo) {
 		this.tipo = tipo;
 	}
+
+	public Date getAbertoEm() {
+		return AbertoEm;
+	}
+
+	public void setAbertoEm(Date abertoEm) {
+		AbertoEm = abertoEm;
+	}
+
+	public Boolean getConcluido() {
+		return Concluido;
+	}
+
+	public void setConcluido(Boolean concluido) {
+		Concluido = concluido;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+	public String getResponsavel() {
+		return Responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		Responsavel = responsavel;
+	}
+
+	
+	
 	
 		
 	

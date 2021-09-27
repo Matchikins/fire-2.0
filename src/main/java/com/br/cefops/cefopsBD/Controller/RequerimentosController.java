@@ -8,16 +8,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
+import com.br.cefops.cefopsBD.domain.Alunos;
 import com.br.cefops.cefopsBD.domain.Posts;
 import com.br.cefops.cefopsBD.domain.requerimetos.Requerimentos;
+import com.br.cefops.cefopsBD.domain.services.requerimentos.RequerimentoServices;
 import com.br.cefops.cefopsBD.repository.requerimentsInterface.RequerimentInterface;
 
 @RestController
@@ -25,23 +30,26 @@ import com.br.cefops.cefopsBD.repository.requerimentsInterface.RequerimentInterf
 @RequestMapping("/api/v1/requerimetos")
 public class RequerimentosController {
 	@Autowired
-	RequerimentInterface requerimento;
+	RequerimentInterface repository;
+	@Autowired
+	RequerimentoServices service;
+	
 	
 	@ResponseBody
 	@PostMapping
 	public ResponseEntity<?> novoRequeri(@RequestBody Requerimentos requeri) {
-		Optional<Requerimentos> optRequerimento = requerimento.findById(requeri.getId());
+		Optional<Requerimentos> optRequerimento = repository.findById(requeri.getId());
 		if (optRequerimento.isPresent())
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
 		
 		
-		requerimento.save(requeri);
+		repository.save(requeri);
 		return ResponseEntity.status(HttpStatus.CREATED).body(requeri);
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> obterrequerimetosID(@PathVariable Long id) {
-		Optional<Requerimentos> optRequerimento = requerimento.findById(id);
+		Optional<Requerimentos> optRequerimento = repository.findById(id);
 		if (optRequerimento.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(optRequerimento.get());
 		}
@@ -49,9 +57,14 @@ public class RequerimentosController {
 	}
 	@GetMapping()
 	public ResponseEntity<?> GetRequeriments() {
-		List<Requerimentos> req = requerimento.findAll();
+		List<Requerimentos> req = repository.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(req);
 	}
 
-
+	@PutMapping(value = "/{id}")
+	public Requerimentos alterarAluno(@PathVariable String id, @RequestBody Requerimentos req) {
+		Requerimentos alunos =repository.save(req);
+		return alunos;
+		
+	}
 }

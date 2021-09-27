@@ -48,4 +48,10 @@ public class Email  implements  SendMailService {
 
 	        javaMailSender.send(msg);
 	    }
+
+		@Override
+		public void sendMailReset(String email, String assunto, String bodString) throws MessagingException {
+			// TODO Auto-generated method stub
+			
+		}
 }
