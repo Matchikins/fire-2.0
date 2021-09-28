@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
-import com.br.cefops.cefopsBD.domain.Alunos;
-import com.br.cefops.cefopsBD.domain.Posts;
 import com.br.cefops.cefopsBD.domain.requerimetos.Requerimentos;
 import com.br.cefops.cefopsBD.domain.services.requerimentos.RequerimentoServices;
 import com.br.cefops.cefopsBD.repository.requerimentsInterface.RequerimentInterface;
@@ -62,9 +59,20 @@ public class RequerimentosController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public Requerimentos alterarAluno(@PathVariable String id, @RequestBody Requerimentos req) {
+	public Requerimentos alterarReq(@PathVariable String id, @RequestBody Requerimentos req) {
 		Requerimentos alunos =repository.save(req);
 		return alunos;
 		
 	}
+	@PatchMapping()
+	public ResponseEntity<?> SetResponsavel(
+			@RequestParam(value = "id")Long id,
+			@RequestParam(value = "responsavel")String responsavel,
+			@RequestParam(value = "st")String status
+			){
+		service.setResponsavelReq(id, responsavel,status);
+		return null;
+		
+	}
+		
 }
