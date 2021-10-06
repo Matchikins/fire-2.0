@@ -15,6 +15,8 @@ public class AlunoConverter {
 			vo.setName(alunos.getName());
 			vo.setLastName(alunos.getLastName());
 			vo.setPhoto(alunos.getPhoto());
+			vo.setEmail(alunos.getEmail());
+			vo.setEnable(alunos.getEnable());
 			
 			return vo;
 			
@@ -26,6 +28,8 @@ public class AlunoConverter {
 		entityAlunos.setName(alunosVo.getName());
 		entityAlunos.setLastName(alunosVo.getLastName());
 		entityAlunos.setPhoto(alunosVo.getPhoto());
+		entityAlunos.setEmail(alunosVo.getEmail());
+		entityAlunos.setEnable(alunosVo.getEnable());
 		
 		return entityAlunos;
 		
