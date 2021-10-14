@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.cefops.cefopsBD.domain.Curso;
+import com.br.cefops.cefopsBD.domain.escola.CursoData;
 import com.br.cefops.cefopsBD.repository.CursoRepository;
 
 @RestController
@@ -28,14 +28,14 @@ public class CursoController {
 	
 
 	@PostMapping(consumes = "application/json")
-	public Curso criar(@RequestBody Curso curso) {
-		Curso cursos =cursointerface.save(curso);
+	public CursoData criar(@RequestBody CursoData curso) {
+		CursoData cursos =cursointerface.save(curso);
 		return cursos;
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> obterAlunosRa(@PathVariable Integer id) {
-		Optional<Curso> optCurso = cursointerface.findById(id);
+		Optional<CursoData> optCurso = cursointerface.findById(id);
 		if (optCurso.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(optCurso.get());
 		}
@@ -44,7 +44,7 @@ public class CursoController {
 
 	@RequestMapping(value = "/cursos/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> eliminarAlunosRa(@PathVariable Integer id) {
-		Optional<Curso> optCurso = cursointerface.findById(id);
+		Optional<CursoData> optCurso = cursointerface.findById(id);
 		if (!optCurso.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}
@@ -54,16 +54,16 @@ public class CursoController {
 
 	@ResponseBody
 	@PutMapping(value = "/{id}")
-	public Curso alterarCursos(@PathVariable Integer id, @RequestBody Curso curso) {
-		Curso cursos = cursointerface.save(curso);
+	public CursoData alterarCursos(@PathVariable Integer id, @RequestBody CursoData curso) {
+		CursoData cursos = cursointerface.save(curso);
 		return cursos;
 		
 		
 	}
 
 	@GetMapping()
-	public List<Curso> obterCursos() {
-		List<Curso> cursos = cursointerface.findAll();
+	public List<CursoData> obterCursos() {
+		List<CursoData> cursos = cursointerface.findAll();
 		return  cursos;
 	}
 

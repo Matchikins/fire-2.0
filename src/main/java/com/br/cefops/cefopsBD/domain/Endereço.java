@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 @Entity
 public class Endereço  implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -26,7 +28,7 @@ public class Endereço  implements Serializable{
 	@Column(columnDefinition = "char(2)")
 	private String uf;
 	@OneToOne(mappedBy = "endereço")
-	private Alunos alunos;
+	private AlunosData alunos;
 	public Long getId() {
 		return id;
 	}
@@ -81,10 +83,10 @@ public class Endereço  implements Serializable{
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public Alunos getAlunos() {
+	public AlunosData getAlunos() {
 		return alunos;
 	}
-	public void setAlunos(Alunos alunos) {
+	public void setAlunos(AlunosData alunos) {
 		this.alunos = alunos;
 	}
 	@Override

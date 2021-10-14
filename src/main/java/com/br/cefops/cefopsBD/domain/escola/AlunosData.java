@@ -1,4 +1,4 @@
-package com.br.cefops.cefopsBD.domain;
+package com.br.cefops.cefopsBD.domain.escola;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.br.cefops.cefopsBD.domain.Endereço;
+import com.br.cefops.cefopsBD.domain.User;
 import com.br.cefops.cefopsBD.domain.requerimetos.Requerimentos;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,11 +21,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
+@Table(name = "alunos")
 @JsonPropertyOrder({ "id", "name", "lastName","cpf","email","photo","requerimentos","enabled"})
-public class Alunos implements Serializable  {
-	/**
-	 * 
-	 */
+public class AlunosData implements Serializable  {
+	
 	private static final long serialVersionUID = 1L;
 	@Id 
 	String Id;
@@ -114,7 +116,7 @@ public class Alunos implements Serializable  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Alunos other = (Alunos) obj;
+		AlunosData other = (AlunosData) obj;
 		return Objects.equals(Cpf, other.Cpf) && Objects.equals(Email, other.Email) && Objects.equals(Id, other.Id)
 				&& Objects.equals(LastName, other.LastName) && Objects.equals(Name, other.Name)
 				&& Objects.equals(enabled, other.enabled) && Objects.equals(photo, other.photo)

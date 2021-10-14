@@ -1,21 +1,24 @@
-package com.br.cefops.cefopsBD.domain;
+package com.br.cefops.cefopsBD.domain.escola;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Disciplinas implements Serializable{
-	/**
-	 * 
-	 */
+@Table(name = "curso")
+public class CursoData implements Serializable{
+	
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer Id;
-	String Name;
+	private Integer Id;
+	private String Name;
+	private boolean isOnline;
 	public Integer getId() {
 		return Id;
 	}
@@ -28,13 +31,15 @@ public class Disciplinas implements Serializable{
 	public void setName(String name) {
 		Name = name;
 	}
+	public boolean isOnline() {
+		return isOnline;
+	}
+	public void setOnline(boolean isOnline) {
+		this.isOnline = isOnline;
+	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
-		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
-		return result;
+		return Objects.hash(Id, Name, isOnline);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -44,18 +49,18 @@ public class Disciplinas implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Disciplinas other = (Disciplinas) obj;
-		if (Id == null) {
-			if (other.Id != null)
-				return false;
-		} else if (!Id.equals(other.Id))
-			return false;
-		if (Name == null) {
-			if (other.Name != null)
-				return false;
-		} else if (!Name.equals(other.Name))
-			return false;
-		return true;
+		CursoData other = (CursoData) obj;
+		return Objects.equals(Id, other.Id) && Objects.equals(Name, other.Name) && isOnline == other.isOnline;
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

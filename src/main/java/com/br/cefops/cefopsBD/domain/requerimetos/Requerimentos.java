@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.br.cefops.cefopsBD.domain.Alunos;
+import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -30,7 +30,7 @@ public class Requerimentos implements Serializable {
 	private Date Entregue;
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	  @JoinColumn(name = "aluno_id")
-		private Alunos aluno;
+		private AlunosData aluno;
 	private Date AbertoEm;
 	private Boolean Concluido;
 	private String Status;
@@ -63,11 +63,11 @@ public class Requerimentos implements Serializable {
 		Entregue = entregue;
 	}
 
-	public Alunos getAluno() {
+	public AlunosData getAluno() {
 		return aluno;
 	}
 
-	public void setAluno(Alunos aluno) {
+	public void setAluno(AlunosData aluno) {
 		this.aluno = aluno;
 	}
 

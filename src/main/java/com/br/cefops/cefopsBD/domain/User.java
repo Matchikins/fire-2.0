@@ -24,6 +24,8 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.br.cefops.cefopsBD.domain.escola.AlunosData;
+
 
 @Entity
 @Table(name = "users")
@@ -37,7 +39,7 @@ private static final long serialVersionUID = 1L;
 	private Long id;
 	@OneToOne
 	@JoinColumn(name="Aluno_ID")
-	private Alunos alunos;
+	private AlunosData alunos;
 	@Column(name = "user_name", unique = true)
 	private String userName;
 	@Column(name = "frist_name")
@@ -79,14 +81,14 @@ private static final long serialVersionUID = 1L;
 	
 	
 	
-	public Alunos getAlunos() {
+	public AlunosData getAlunos() {
 		return alunos;
 	}
 
 
 
 
-	public void setAlunos(Alunos alunos) {
+	public void setAlunos(AlunosData alunos) {
 		this.alunos = alunos;
 	}
 

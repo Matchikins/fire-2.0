@@ -14,23 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.br.cefops.cefopsBD.domain.Disciplinas;
+
 import com.br.cefops.cefopsBD.domain.Professor;
-import com.br.cefops.cefopsBD.repository.DiciplinaRepository;
+import com.br.cefops.cefopsBD.domain.escola.DisciplinasData;
+import com.br.cefops.cefopsBD.repository.DisciplinaRepository;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/diciplinas")
 
-public class DiciplinaController {
+public class DisciplinaController {
 	@Autowired
-	DiciplinaRepository diciplinainterface;
+	DisciplinaRepository diciplinainterface;
 	
 	
 	@ResponseBody
 	@PostMapping(consumes  =  "application/json")
-	public ResponseEntity<?> novodiciplina(@RequestBody Disciplinas diciplina) {
-		Optional<Disciplinas> optdiciplina = diciplinainterface.findById(diciplina.getId());
+	public ResponseEntity<?> novodiciplina(@RequestBody DisciplinasData diciplina) {
+		Optional<DisciplinasData> optdiciplina = diciplinainterface.findById(diciplina.getId());
 		if (optdiciplina.isPresent())
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
 		diciplinainterface.save(diciplina);
@@ -40,13 +41,13 @@ public class DiciplinaController {
 
 @GetMapping
 public ResponseEntity<?> obterdiciplinas() {
-		List<Disciplinas> diciplinas = diciplinainterface.findAll();
+		List<DisciplinasData> diciplinas = diciplinainterface.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(diciplinas);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> eliminarprofessorsRa(@PathVariable Integer id) {
-		Optional<Disciplinas> optdiciplinas = diciplinainterface.findById(id);
+		Optional<DisciplinasData> optdiciplinas = diciplinainterface.findById(id);
 		if (!optdiciplinas.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}

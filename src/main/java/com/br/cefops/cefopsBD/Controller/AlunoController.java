@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.cefops.cefopsBD.Services.AlunoServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
-import com.br.cefops.cefopsBD.domain.Alunos;
+import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 import com.br.cefops.cefopsBD.repository.AlunoRepository;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,16 +35,16 @@ public class AlunoController {
 	
 	@CrossOrigin(origins = "http://localhost:8810")
 	@GetMapping(produces = { "application/json"})
-	public List<Alunos> obterAlunos() {
-		List<Alunos> alunos = alunointerface.findAll();
+	public List<AlunosData> obterAlunos() {
+		List<AlunosData> alunos = alunointerface.findAll();
 		return alunos;
 	}
 
 
 	@ResponseBody
 	@PostMapping(consumes = "application/json")
-	public Alunos creat(@RequestBody Alunos aluno) {
-		Alunos alunos=alunointerface.save(aluno);
+	public AlunosData creat(@RequestBody AlunosData aluno) {
+		AlunosData alunos=alunointerface.save(aluno);
 		return alunos;
 	}
 
@@ -62,8 +62,8 @@ public class AlunoController {
 
 
 	@PutMapping(value = "/{id}")
-	public Alunos alterarAluno(@PathVariable String id, @RequestBody Alunos aluno) {
-		Alunos alunos =alunointerface.save(aluno);
+	public AlunosData alterarAluno(@PathVariable String id, @RequestBody AlunosData aluno) {
+		AlunosData alunos =alunointerface.save(aluno);
 		return alunos;
 		
 	}
@@ -74,13 +74,13 @@ public class AlunoController {
 		return alunosVo;
 		
 	}
-	@PatchMapping(value = "/{id}")
-	public ResponseEntity<AlunosVo> disableStudant(@PathVariable("id") String id) {	
-		serviceAlunoServices.disableStudant(id);
-		return 	 ResponseEntity.ok().build();
-
-		
-	}
+//	@PatchMapping(value = "/{id}")
+//	public ResponseEntity<AlunosVo> disableStudant(@PathVariable("id") String id) {	
+//		serviceAlunoServices.disableStudant(id);
+//		return 	 ResponseEntity.ok().build();
+//
+//		
+//	}
 
 	
 	

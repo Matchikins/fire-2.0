@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.br.cefops.cefopsBD.domain.Alunos;
+import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 import com.br.cefops.cefopsBD.domain.requerimetos.Requerimentos;
 import com.br.cefops.cefopsBD.domain.requerimetos.TiposRequerimentos;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,7 +25,7 @@ public class RequerimentVo  implements Serializable {
 	
 	private long id;
 	private Date Entregue;
-	private Alunos aluno;
+	private AlunosData aluno;
 	private Date AbertoEm;
 	private Boolean Concluido;
 	private String Status;
@@ -43,10 +43,10 @@ public class RequerimentVo  implements Serializable {
 	public void setEntregue(Date entregue) {
 		Entregue = entregue;
 	}
-	public Alunos getAluno() {
+	public AlunosData getAluno() {
 		return aluno;
 	}
-	public void setAluno(Alunos aluno) {
+	public void setAluno(AlunosData aluno) {
 		this.aluno = aluno;
 	}
 	public Date getAbertoEm() {

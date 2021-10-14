@@ -3,12 +3,12 @@ package com.br.cefops.cefopsBD.converter;
 import org.springframework.stereotype.Service;
 
 import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
-import com.br.cefops.cefopsBD.domain.Alunos;
+import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 
 @Service
 public class AlunoConverter {
 		
-	public AlunosVo convertEntityToVO(Alunos alunos) {
+	public AlunosVo convertEntityToVO(AlunosData alunos) {
 			AlunosVo vo= new AlunosVo();
 			vo.setId(alunos.getId());
 			vo.setCpf(alunos.getCpf());
@@ -21,8 +21,8 @@ public class AlunoConverter {
 			return vo;
 			
 		}
-	public Alunos  convertVOToEntity(AlunosVo alunosVo) {
-		Alunos entityAlunos= new Alunos();
+	public AlunosData  convertVOToEntity(AlunosVo alunosVo) {
+		AlunosData entityAlunos= new AlunosData();
 		entityAlunos.setId(alunosVo.getId());
 		entityAlunos.setCpf(alunosVo.getCpf());
 		entityAlunos.setName(alunosVo.getName());
