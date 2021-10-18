@@ -9,8 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,21 +25,9 @@ import com.br.cefops.cefopsBD.Security.JWT.JwtTokenProvider;
 import com.br.cefops.cefopsBD.Services.UserServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AccountCredentialSignUpVO;
 import com.br.cefops.cefopsBD.data.vo.v1.AccountCredentialsVO;
-import com.br.cefops.cefopsBD.domain.boletos.BoletoBradescoExample;
-import com.br.cefops.cefopsBD.domain.email.Email;
-import com.br.cefops.cefopsBD.domain.email.EmailControll;
 import com.br.cefops.cefopsBD.repository.UserRepository;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import br.com.caelum.stella.boleto.Banco;
-import br.com.caelum.stella.boleto.Beneficiario;
-import br.com.caelum.stella.boleto.Boleto;
-import br.com.caelum.stella.boleto.Datas;
-import br.com.caelum.stella.boleto.Endereco;
-import br.com.caelum.stella.boleto.Pagador;
-import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
-import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+
 
 
 
@@ -95,64 +81,7 @@ public class AuthController {
 			model.put("fullInfo", aluno);
 			model.put("role",levelacess );
 			model.put("token", token);
-			BoletoBradescoExample as =new BoletoBradescoExample();
-			 Datas datas = Datas.novasDatas()
-		                .comDocumento(1, 5, 2008)
-		                .comProcessamento(1, 5, 2008)
-		                .comVencimento(2, 5, 2008);  
-
-		        Endereco enderecoBeneficiario = Endereco.novoEndereco()
-		        		.comLogradouro("Av das Empresas, 555")  
-		        		.comBairro("Bairro Grande")  
-		        		.comCep("01234-555")  
-		        		.comCidade("São Paulo")  
-		        		.comUf("SP");  
-
-		        //Quem emite o boleto
-		        Beneficiario beneficiario = Beneficiario.novoBeneficiario()  
-		                .comNomeBeneficiario("Fulano de Tal")  
-		                .comAgencia("1824").comDigitoAgencia("4")  
-		                .comCodigoBeneficiario("76000")  
-		                .comDigitoCodigoBeneficiario("5")  
-		                .comNumeroConvenio("1207113")  
-		                .comCarteira("18")  
-		                .comEndereco(enderecoBeneficiario)
-		                .comNossoNumero("9000206");  
-
-		        Endereco enderecoPagador = Endereco.novoEndereco()
-		        		.comLogradouro("Av dos testes, 111 apto 333")  
-		        		.comBairro("Bairro Teste")  
-		        		.comCep("01234-111")  
-		        		.comCidade("São Paulo")  
-		        		.comUf("SP");  
-		        
-		        //Quem paga o boleto
-		        Pagador pagador = Pagador.novoPagador()  
-		                .comNome("Fulano da Silva")  
-		                .comDocumento("111.222.333-12")
-		                .comEndereco(enderecoPagador);
-
-		        Banco banco = new BancoDoBrasil();  
-
-		        Boleto boleto = Boleto.novoBoleto()  
-		                .comBanco(banco)  
-		                .comDatas(datas)  
-		                .comBeneficiario(beneficiario)  
-		                .comPagador(pagador)  
-		                .comValorBoleto("200.00")  
-		                .comNumeroDoDocumento("1234")  
-		                .comInstrucoes("instrucao 1", "instrucao 2", "instrucao 3", "instrucao 4", "instrucao 5")  
-		                .comLocaisDePagamento("local 1", "local 2");  
-
-		        GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);  
-
-		        gerador.geraPDF("BancoDoBrasil.pdf");  
-
-		        gerador.geraPNG("BancoDoBrasil.png");  
-
-		        byte[] bPDF = gerador.geraPDF();  
-
-		        byte[] bPNG = gerador.geraPNG();
+			
 		
 			return ok(model);
 		} catch (AuthenticationException e) {
