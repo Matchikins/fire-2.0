@@ -1,5 +1,6 @@
 package com.br.cefops.cefopsBD.domain.escola;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +30,9 @@ public class AlunosData implements Serializable  {
 	@Id 
 	String Id;
 	String Name;
+	String EstadoNatal;
+	String Naturalidade;
+	Date dataNanscimento;
 	String LastName;
 	String Email;
 	@Column(columnDefinition = "char(11)")
