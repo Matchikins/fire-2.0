@@ -1,12 +1,12 @@
 package com.br.cefops.cefopsBD.Controller;
 import java.util.List;
-
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,7 +24,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Endpoint Alunos",description = "EndPoint Responsavel Por Controlar o EndPoint Alunos")
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/alunos")
 public class AlunoController {
 	
@@ -33,7 +32,6 @@ public class AlunoController {
 	@Autowired
 	AlunoServices serviceAlunoServices;
 	
-	@CrossOrigin(origins = "http://localhost:8810")
 	@GetMapping(produces = { "application/json"})
 	public List<AlunosData> obterAlunos() {
 		List<AlunosData> alunos = alunointerface.findAll();
@@ -50,7 +48,10 @@ public class AlunoController {
 
 	@GetMapping(value = "/{id}")
 	public AlunosVo obterAlunosid(@PathVariable("id") String id) {	
-		return serviceAlunoServices.findAlunosID(id);
+		AlunosVo alunosVo=serviceAlunoServices.findAlunosID(id);
+		alunosVo.add(linkTo(methodOn(EnderecoController.class).buscarPorID( (long) 1)).withRel("Endereço"));
+		alunosVo.add(linkTo(methodOn(RequerimentosController.class).obterrequerimetosID( (long) 1)).withRel("Requerimentos"));
+		return alunosVo;
 		
 	}
 

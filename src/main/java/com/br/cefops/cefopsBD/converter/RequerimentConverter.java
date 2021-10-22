@@ -10,7 +10,7 @@ public class RequerimentConverter {
 
 	public RequerimentVo convertEntityToVo(Requerimentos requerimentos) {
 		RequerimentVo vo=new RequerimentVo();
-		vo.setId(requerimentos.getId());
+		vo.setKey(requerimentos.getId());
 		vo.setTipo(requerimentos.getTipo());
 		vo.setAbertoEm(requerimentos.getAbertoEm());
 		vo.setAluno(requerimentos.getAluno());
@@ -27,7 +27,7 @@ public class RequerimentConverter {
 		entity.setAluno(requerimentosVo.getAluno());
 		entity.setConcluido(requerimentosVo.getConcluido());
 		entity.setEntregue(requerimentosVo.getEntregue());
-		entity.setId(requerimentosVo.getId());
+		entity.setId(requerimentosVo.getKey());
 		entity.setResponsavel(requerimentosVo.getResponsavel());
 		entity.setStatus(requerimentosVo.getStatus());
 		entity.setTipo(requerimentosVo.getTipo());

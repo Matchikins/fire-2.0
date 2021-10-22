@@ -48,7 +48,6 @@ public class AlunosData implements Serializable  {
 	@OneToOne(mappedBy = "alunos")
 	private User user;
 	@OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "endereço_id", referencedColumnName = "id")
 	private Endereço endereço;
 	
 	

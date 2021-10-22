@@ -11,19 +11,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 import com.br.cefops.cefopsBD.domain.requerimetos.Requerimentos;
 import com.br.cefops.cefopsBD.domain.requerimetos.TiposRequerimentos;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonPropertyOrder({ "id", "aluno", "tipo","Status","AbertoEm","requerimento","Responsavel","Entregue","Concluido"})
-public class RequerimentVo  implements Serializable {
+public class RequerimentVo  extends RepresentationModel<RequerimentVo> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	
-	private long id;
+	@Mapping("id")
+	private long key;
 	private Date Entregue;
 	private AlunosData aluno;
 	private Date AbertoEm;
@@ -31,11 +34,11 @@ public class RequerimentVo  implements Serializable {
 	private String Status;
 	private String Responsavel;
 	private TiposRequerimentos tipo;
-	public long getId() {
-		return id;
+	public long getKey() {
+		return key;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setKey(long key) {
+		this.key = key;
 	}
 	public Date getEntregue() {
 		return Entregue;
@@ -81,23 +84,29 @@ public class RequerimentVo  implements Serializable {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(AbertoEm, Concluido, Entregue, Responsavel, Status, aluno, id, tipo);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(AbertoEm, Concluido, Entregue, Responsavel, Status, aluno, key, tipo);
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		RequerimentVo other = (RequerimentVo) obj;
 		return Objects.equals(AbertoEm, other.AbertoEm) && Objects.equals(Concluido, other.Concluido)
 				&& Objects.equals(Entregue, other.Entregue) && Objects.equals(Responsavel, other.Responsavel)
-				&& Objects.equals(Status, other.Status) && Objects.equals(aluno, other.aluno) && id == other.id
+				&& Objects.equals(Status, other.Status) && Objects.equals(aluno, other.aluno) && key == other.key
 				&& Objects.equals(tipo, other.tipo);
 	}
+	
 
+	
+	
 	
 	
 
