@@ -55,7 +55,6 @@ public class AuthController {
 	@PostMapping(value = "/signin", produces = "application/json", 
 			consumes =  "application/json" )
 	public ResponseEntity signin(@RequestBody AccountCredentialsVO data) {
-		System.out.println(data.getUsername());
 		try {
 			var username = data.getUsername();
 			var pasword = data.getPassword();
@@ -82,7 +81,6 @@ public class AuthController {
 			model.put("role",levelacess );
 			model.put("token", token);
 			
-		
 			return ok(model);
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException("Invalid username or password !");

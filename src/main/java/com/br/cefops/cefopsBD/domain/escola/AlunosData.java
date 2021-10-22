@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.br.cefops.cefopsBD.domain.EnderecoV2;
 import com.br.cefops.cefopsBD.domain.Endereço;
 import com.br.cefops.cefopsBD.domain.User;
 import com.br.cefops.cefopsBD.domain.requerimetos.Requerimentos;
@@ -49,39 +50,8 @@ public class AlunosData implements Serializable  {
 	private User user;
 	@OneToOne(cascade = CascadeType.REMOVE)
 	private Endereço endereço;
-	
-	
-	public Boolean getEnable() {
-		return enabled;
-	}
-	public void setEnable(Boolean enable) {
-		this.enabled = enable;
-	}
-	String  Cpf;
-	public String getCpf() {
-		return Cpf;
-	}
-	public void setCpf(String cpf) {
-		Cpf = cpf;
-	}
-
-
-
-
-	
-
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-
-	
-
-	
-	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "aluno")
+	private EnderecoV2 enderecoV2 ;
 	public String getId() {
 		return Id;
 	}
@@ -94,22 +64,88 @@ public class AlunosData implements Serializable  {
 	public void setName(String name) {
 		Name = name;
 	}
+	public String getEstadoNatal() {
+		return EstadoNatal;
+	}
+	public void setEstadoNatal(String estadoNatal) {
+		EstadoNatal = estadoNatal;
+	}
+	public String getNaturalidade() {
+		return Naturalidade;
+	}
+	public void setNaturalidade(String naturalidade) {
+		Naturalidade = naturalidade;
+	}
+	public Date getDataNanscimento() {
+		return dataNanscimento;
+	}
+	public void setDataNanscimento(Date dataNanscimento) {
+		this.dataNanscimento = dataNanscimento;
+	}
 	public String getLastName() {
 		return LastName;
 	}
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
-	
 	public String getEmail() {
 		return Email;
 	}
 	public void setEmail(String email) {
 		Email = email;
 	}
+	public String getTeleFoneCelular() {
+		return TeleFoneCelular;
+	}
+	public void setTeleFoneCelular(String teleFoneCelular) {
+		TeleFoneCelular = teleFoneCelular;
+	}
+	public String getTeleFone() {
+		return TeleFone;
+	}
+	public void setTeleFone(String teleFone) {
+		TeleFone = teleFone;
+	}
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public List<Requerimentos> getRequerimentos() {
+		return requerimentos;
+	}
+	public void setRequerimentos(List<Requerimentos> requerimentos) {
+		this.requerimentos = requerimentos;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Endereço getEndereço() {
+		return endereço;
+	}
+	public void setEndereço(Endereço endereço) {
+		this.endereço = endereço;
+	}
+	public EnderecoV2 getEnderecoV2() {
+		return enderecoV2;
+	}
+	public void setEnderecoV2(EnderecoV2 enderecoV2) {
+		this.enderecoV2 = enderecoV2;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(Cpf, Email, Id, LastName, Name, enabled, photo, requerimentos, user);
+		return Objects.hash(Email, EstadoNatal, Id, LastName, Name, Naturalidade, TeleFone, TeleFoneCelular,
+				dataNanscimento, enabled, enderecoV2, endereço, photo, requerimentos, user);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -120,11 +156,18 @@ public class AlunosData implements Serializable  {
 		if (getClass() != obj.getClass())
 			return false;
 		AlunosData other = (AlunosData) obj;
-		return Objects.equals(Cpf, other.Cpf) && Objects.equals(Email, other.Email) && Objects.equals(Id, other.Id)
-				&& Objects.equals(LastName, other.LastName) && Objects.equals(Name, other.Name)
-				&& Objects.equals(enabled, other.enabled) && Objects.equals(photo, other.photo)
-				&& Objects.equals(requerimentos, other.requerimentos) && Objects.equals(user, other.user);
+		return Objects.equals(Email, other.Email) && Objects.equals(EstadoNatal, other.EstadoNatal)
+				&& Objects.equals(Id, other.Id) && Objects.equals(LastName, other.LastName)
+				&& Objects.equals(Name, other.Name) && Objects.equals(Naturalidade, other.Naturalidade)
+				&& Objects.equals(TeleFone, other.TeleFone) && Objects.equals(TeleFoneCelular, other.TeleFoneCelular)
+				&& Objects.equals(dataNanscimento, other.dataNanscimento) && Objects.equals(enabled, other.enabled)
+				&& Objects.equals(enderecoV2, other.enderecoV2) && Objects.equals(endereço, other.endereço)
+				&& Objects.equals(photo, other.photo) && Objects.equals(requerimentos, other.requerimentos)
+				&& Objects.equals(user, other.user);
 	}
+	
+	
+	
 	
 
 

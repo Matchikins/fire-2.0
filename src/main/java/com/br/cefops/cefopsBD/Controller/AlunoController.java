@@ -1,7 +1,12 @@
 package com.br.cefops.cefopsBD.Controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.http.ResponseEntity.ok;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.cefops.cefopsBD.Services.AlunoServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
 import com.br.cefops.cefopsBD.domain.escola.AlunosData;
-import com.br.cefops.cefopsBD.repository.AlunoRepository;
+import com.br.cefops.cefopsBD.repository.AlunoRepository;import com.br.cefops.cefopsBD.repository.EndrerecoRepository;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -51,6 +56,8 @@ public class AlunoController {
 		AlunosVo alunosVo=serviceAlunoServices.findAlunosID(id);
 		alunosVo.add(linkTo(methodOn(EnderecoController.class).buscarPorID( (long) 1)).withRel("Endereço"));
 		alunosVo.add(linkTo(methodOn(RequerimentosController.class).obterrequerimetosID( (long) 1)).withRel("Requerimentos"));
+		Map<Object, Object> model = new HashMap<>();
+		model.put("dados", alunosVo);
 		return alunosVo;
 		
 	}
