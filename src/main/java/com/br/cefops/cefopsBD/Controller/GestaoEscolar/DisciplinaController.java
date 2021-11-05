@@ -18,7 +18,6 @@ import com.br.cefops.cefopsBD.domain.escola.Curso.DisciplinasData;
 import com.br.cefops.cefopsBD.repository.GestaoEscolar.DisciplinaRepository;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/diciplinas")
 
 public class DisciplinaController {
@@ -28,7 +27,7 @@ public class DisciplinaController {
 	
 	@ResponseBody
 	@PostMapping(consumes  =  "application/json")
-	public ResponseEntity<?> novodiciplina(@RequestBody DisciplinasData diciplina) {
+	public ResponseEntity<?> novaDiciplina(@RequestBody DisciplinasData diciplina) {
 		Optional<DisciplinasData> optdiciplina = diciplinainterface.findById(diciplina.getId());
 		if (optdiciplina.isPresent())
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
@@ -38,13 +37,13 @@ public class DisciplinaController {
 
 
 @GetMapping
-public ResponseEntity<?> obterdiciplinas() {
+public ResponseEntity<?> obterDiciplinas() {
 		List<DisciplinasData> diciplinas = diciplinainterface.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(diciplinas);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> eliminarprofessorsRa(@PathVariable Integer id) {
+	public ResponseEntity<?> eliminarDisciplina(@PathVariable Integer id) {
 		Optional<DisciplinasData> optdiciplinas = diciplinainterface.findById(id);
 		if (!optdiciplinas.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

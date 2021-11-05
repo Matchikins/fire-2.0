@@ -20,7 +20,7 @@ import com.br.cefops.cefopsBD.Services.escola.AlunoServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
 import com.br.cefops.cefopsBD.domain.escola.AlunosData;
 import com.br.cefops.cefopsBD.repository.GestaoEscolar.AlunoRepository;
-import com.br.cefops.cefopsBD.repository.GestaoEscolar.requerimentsInterface;
+import com.br.cefops.cefopsBD.repository.GestaoEscolar.RequerimentoRepository;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -32,7 +32,7 @@ public class AlunoController {
 	@Autowired
 	AlunoRepository alunointerface;
 	@Autowired
-	requerimentsInterface requerimento;
+    RequerimentoRepository requerimento;
 	@Autowired
 	AlunoServices serviceAlunoServices;
 	
@@ -46,8 +46,8 @@ public class AlunoController {
 
 	@ResponseBody
 	@PostMapping(consumes = "application/json")
-	public AlunosData creat(@RequestBody AlunosData aluno) {
-		AlunosData alunos=alunointerface.save(aluno);
+	public AlunosVo criarAluno(@RequestBody AlunosVo aluno) {
+		AlunosVo alunos=serviceAlunoServices.creatAluno(aluno);
 		return alunos;
 	}
 
@@ -64,21 +64,21 @@ public class AlunoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> eliminarAlunos(@PathVariable("id") String id) {
+	public ResponseEntity<?> eliminarAluno(@PathVariable("id") String id) {
 		serviceAlunoServices.delete(id);
 		return ResponseEntity.ok().build();
 	}
 
 
 	@PutMapping(value = "/{id}")
-	public AlunosData alterarAluno(@PathVariable String id, @RequestBody AlunosData aluno) {
-		AlunosData alunos =alunointerface.save(aluno);
+	public AlunosVo alterarAluno(@PathVariable String id, @RequestBody AlunosVo aluno) {
+		AlunosVo alunos =serviceAlunoServices.updateAluno(aluno);
 		return alunos;
 		
 	}
 
 	@PutMapping(value = "/v2/{id}")
-	public AlunosVo updAlunos(@RequestBody AlunosVo aluno) {
+	public AlunosVo atualizarAlunos(@RequestBody AlunosVo aluno) {
 		AlunosVo alunosVo =serviceAlunoServices.updateAluno(aluno);
 		return alunosVo;
 		

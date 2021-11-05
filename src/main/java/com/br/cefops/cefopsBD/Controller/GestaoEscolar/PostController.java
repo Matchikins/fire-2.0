@@ -22,7 +22,6 @@ import com.br.cefops.cefopsBD.repository.GestaoEscolar.PostRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Endpoint Post",description = "EndPoint Responsavel Por Criar Postes para Tela Inicial Do App")
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/post")
 
 public class PostController {
@@ -30,13 +29,13 @@ public class PostController {
 	PostRepository postsinterface;
 	
 @GetMapping(produces =  "application/json")
-public ResponseEntity<?> obterPostes() {
+public ResponseEntity<?> obterTodosPostes() {
 		List<Posts> posts = postsinterface.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(posts);
 	}
 	
 @GetMapping(value = "/{id}")
-	public ResponseEntity<?> obterPostID(@PathVariable Integer id) {
+	public ResponseEntity<?> obterPostId(@PathVariable Integer id) {
 		Optional<Posts> optPosts = postsinterface.findById(id);
 		if (optPosts.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(optPosts.get());
@@ -58,7 +57,7 @@ public ResponseEntity<?> obterPostes() {
 	
 	@ResponseBody
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> alterarpost(@PathVariable Integer id, @RequestBody Posts postNovo) {
+	public ResponseEntity<?> alterarPost(@PathVariable Integer id, @RequestBody Posts postNovo) {
 		Optional<Posts> optPost = postsinterface.findById(id);
 		if (!optPost.isPresent())
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Não encontrado");

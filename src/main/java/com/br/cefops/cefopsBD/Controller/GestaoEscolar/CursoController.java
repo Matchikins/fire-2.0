@@ -11,7 +11,6 @@ import com.br.cefops.cefopsBD.domain.escola.Curso.CursoData;
 import com.br.cefops.cefopsBD.repository.GestaoEscolar.CursoRepository;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/cursos")
 public class CursoController {
 	
@@ -20,13 +19,13 @@ public class CursoController {
 	
 
 	@PostMapping(consumes = "application/json")
-	public CursoData criar(@RequestBody CursoData curso) {
+	public CursoData criarCurso(@RequestBody CursoData curso) {
 		CursoData cursos =cursointerface.save(curso);
 		return cursos;
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> obterAlunosRa(@PathVariable Integer id) {
+	public ResponseEntity<?> obterCursoId(@PathVariable Integer id) {
 		Optional<CursoData> optCurso = cursointerface.findById(id);
 		if (optCurso.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(optCurso.get());
@@ -35,7 +34,7 @@ public class CursoController {
 	}
 
 	@DeleteMapping(value = "/cursos/{id}")
-	public ResponseEntity<?> eliminarAlunosRa(@PathVariable Integer id) {
+	public ResponseEntity<?> eliminarCurso(@PathVariable Integer id) {
 		Optional<CursoData> optCurso = cursointerface.findById(id);
 		if (!optCurso.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

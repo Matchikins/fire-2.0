@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "alunos")
-@JsonPropertyOrder({ "id", "name", "lastName","cpf","email","photo","requerimentos","enabled"})
 public class AlunosData implements Serializable  {
 	
 	private static final long serialVersionUID = 1L;

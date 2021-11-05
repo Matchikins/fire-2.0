@@ -1,10 +1,7 @@
 package com.br.cefops.cefopsBD.domain.escola.Documentos;
 
 import com.br.cefops.cefopsBD.domain.escola.AlunosData;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,8 +36,10 @@ public class DocumentosData  implements Serializable {
     private String situacaomilitar;
     private String nomedamae;
     private String nomedopai;
+
     @OneToOne()
     @Setter
+    @Getter(value = AccessLevel.NONE)
     private AlunosData alunosId;
 
 }

@@ -2,14 +2,14 @@ package com.br.cefops.cefopsBD.converter;
 
 import org.springframework.stereotype.Service;
 
-import com.br.cefops.cefopsBD.data.vo.v1.RequerimentVo;
+import com.br.cefops.cefopsBD.data.vo.v1.RequerimentoVo;
 import com.br.cefops.cefopsBD.domain.escola.Requerimentos.Requerimentos;
 
 @Service
 public class RequerimentConverter {
 
-	public RequerimentVo convertEntityToVo(Requerimentos requerimentos) {
-		RequerimentVo vo=new RequerimentVo();
+	public RequerimentoVo convertEntityToVo(Requerimentos requerimentos) {
+		RequerimentoVo vo=new RequerimentoVo();
 		vo.setKey(requerimentos.getId());
 		vo.setTipo(requerimentos.getTipo());
 		vo.setAbertoEm(requerimentos.getAbertoEm());
@@ -20,7 +20,7 @@ public class RequerimentConverter {
 		return vo;
 	}
 	
-	public Requerimentos convertVoToEntity(RequerimentVo requerimentosVo) {
+	public Requerimentos convertVoToEntity(RequerimentoVo requerimentosVo) {
 		Requerimentos entity=new Requerimentos();
 		entity.setAbertoEm(requerimentosVo.getAbertoEm());
 		entity.setConcluido(requerimentosVo.getConcluido());

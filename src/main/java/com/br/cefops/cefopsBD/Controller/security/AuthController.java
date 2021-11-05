@@ -85,7 +85,7 @@ public class AuthController {
 				model.put("AlunoId", aluno.getId().toString());
 				model.put("foto",aluno.getPhoto());
 			}
-			model.put("Full Name",fullNames);
+			model.put("FullName",fullNames);
 			model.put("role",levelacess );
 			model.put("token", token);
 			

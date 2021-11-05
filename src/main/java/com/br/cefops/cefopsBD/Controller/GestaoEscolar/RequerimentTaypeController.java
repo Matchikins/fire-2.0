@@ -15,14 +15,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Endpoint Tipos de requerimentos",description = "EndPoint Responsavel Por Controlar os Tipos de Requerminetos")
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/tiposrequerimentos")
 public class RequerimentTaypeController {
 @Autowired
 RequerimentTaypeService service;
 
 	@GetMapping()
-	public List<RequerimentsTypysVo> getAllTaypesRequeriment() {
+	public List<RequerimentsTypysVo> buscarTodosTiposdeRequerimentos() {
 		
 		return service.FindAllRequerimentsType();
 	}

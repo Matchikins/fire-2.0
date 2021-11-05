@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Endpoint Professores",description = "EndPoint Responsavel Por ")
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/v1/professors")
 public class ProfessorController {
 	@Autowired
@@ -40,7 +39,7 @@ public ResponseEntity<?> novoprofessor(@RequestBody Professor professor) {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> obterprofessorsRa(@PathVariable Integer id) {
+	public ResponseEntity<?> obterProfessorsId(@PathVariable Integer id) {
 		Optional<Professor> optprofessor = professorinterface.findById(id);
 		if (optprofessor.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(optprofessor.get());
@@ -49,7 +48,7 @@ public ResponseEntity<?> novoprofessor(@RequestBody Professor professor) {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> eliminarprofessorsRa(@PathVariable Integer id) {
+	public ResponseEntity<?> eliminarProfessors(@PathVariable Integer id) {
 		Optional<Professor> optprofessor = professorinterface.findById(id);
 		if (!optprofessor.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
@@ -60,7 +59,7 @@ public ResponseEntity<?> novoprofessor(@RequestBody Professor professor) {
 
 	@ResponseBody
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> alterarprofessor(@PathVariable Integer id, @RequestBody Professor professorNovo) {
+	public ResponseEntity<?> alterarProfessor(@PathVariable Integer id, @RequestBody Professor professorNovo) {
 		Optional<Professor> optprofessor = professorinterface.findById(id);
 		if (!optprofessor.isPresent())
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
@@ -77,7 +76,7 @@ public ResponseEntity<?> novoprofessor(@RequestBody Professor professor) {
 	}
 
 @GetMapping(produces =  "application/json")
-public ResponseEntity<?> obterprofessors() {
+public ResponseEntity<?> obterTodosProfessores() {
 		List<Professor> professors = professorinterface.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(professors);
 	}

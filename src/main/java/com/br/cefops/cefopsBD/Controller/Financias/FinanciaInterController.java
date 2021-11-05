@@ -28,18 +28,18 @@ public class FinanciaInterController {
 	FinanceInternalServices services;
 	
 	@GetMapping()
-	public List<FinancesInternaVo> ObterTodasFinanças(){
+	public List<FinancesInternaVo> obterTodasFinancas(){
 		return  services.BuscarTodos();
 	}
 	
 	@GetMapping("/{id}")
-	public FinancesInternaVo FinançaId(@PathVariable("id") Long id) {
+	public FinancesInternaVo buscarFinanca(@PathVariable("id") Long id) {
 		
 		return services.BuscarID(id);
 	}
 	
 	@PostMapping
-	public FinancesInternaVo CriarFinanca(@RequestBody FinancesInternaVo finance) {
+	public FinancesInternaVo criarFinanca(@RequestBody FinancesInternaVo finance) {
 		return services.NovaFinancia(finance);
 	}
 	

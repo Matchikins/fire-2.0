@@ -11,7 +11,7 @@ import com.br.cefops.cefopsBD.domain.escola.Requerimentos.Requerimentos;
 import java.util.List;
 
 @Repository
-public interface requerimentsInterface extends  JpaRepository<Requerimentos, Long>{
+public interface RequerimentoRepository extends  JpaRepository<Requerimentos, Long>{
 
 
 	@Modifying
@@ -23,7 +23,7 @@ public interface requerimentsInterface extends  JpaRepository<Requerimentos, Lon
 			);
 	
 
-	@Query(value = "SELECT R FROM Requerimentos as R  WHERE R.aluno.id = ?1")
+	@Query(value = "SELECT R FROM Requerimentos as R  WHERE R.aluno.Id = ?1")
    List<Requerimentos> buscarAlunoId(String id);
 
 

@@ -36,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.httpBasic().disable()
-			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 				.authorizeRequests()
@@ -45,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET,"/api/v1/alunos/{id}").hasRole("Aluno")
 				.antMatchers("​/api​/v1​/financa​/**").hasAuthority("ROLE_Financeiro")
 				.antMatchers("/users").denyAll()
+				.antMatchers("/alunos").hasRole("ADM")
 			.and()
 			.apply(new JwtConfigurer(tokenProvider));
 		 http.cors();

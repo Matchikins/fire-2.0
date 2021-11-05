@@ -27,7 +27,7 @@ public class EnderecoController {
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public EnderecoVo NovoEndereco(@RequestBody EnderecoVo endereco) {
+	public EnderecoVo novoEndereco(@RequestBody EnderecoVo endereco) {
 		return service.NovoEndereco(endereco);
 	}
 	

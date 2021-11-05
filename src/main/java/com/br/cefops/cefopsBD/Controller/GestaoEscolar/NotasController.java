@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name = "Endpoint Notas",description = "EndPoint Responsavel Por Controlar A notas dos Alunos")
-@RestController
 @RequestMapping("/api/v1/notas")
 public class NotasController {
     @Autowired
@@ -32,7 +31,7 @@ public class NotasController {
 
         }
     @PostMapping(consumes = "application/json")
-    public NotasAlunosData NovaNota(@RequestBody NotasAlunosData nota) {
+    public NotasAlunosData novaNota(@RequestBody NotasAlunosData nota) {
         NotasAlunosData notas=service.SetScore(nota);
         return notas;
     }
