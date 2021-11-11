@@ -36,7 +36,7 @@ class AlunoServicesTest {
         var entity= new AlunosVo();
         entity.setName("Virgulino");
         entity.setLastName("Ferreira da Silva");
-        entity.setKey("123456789101");
+        entity.setId("123456789101");
         entity.setEmail("emisondias1@gmail.com");
         services.creatAluno(entity);
         assertEquals(entity,services.creatAluno(entity));

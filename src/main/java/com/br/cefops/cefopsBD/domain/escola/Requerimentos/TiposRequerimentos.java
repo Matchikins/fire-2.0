@@ -1,17 +1,13 @@
 package com.br.cefops.cefopsBD.domain.escola.Requerimentos;
 
-import java.util.List;
-import java.util.Set;
+import lombok.Data;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
+@Data
 @Entity
 public class TiposRequerimentos {
 	@Id
@@ -20,31 +16,6 @@ public class TiposRequerimentos {
 	private String name;
 	private String grupo;
 	private Integer diasPentregar;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getDiasPentregar() {
-		return diasPentregar;
-	}
-	public void setDiasPentregar(Integer diasPentregar) {
-		this.diasPentregar = diasPentregar;
-	}
-	public String getGrupo() {
-		return grupo;
-	}
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
-	}
-	
 	
 	
 	

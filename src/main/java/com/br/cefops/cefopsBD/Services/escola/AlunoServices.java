@@ -3,6 +3,7 @@ package com.br.cefops.cefopsBD.Services.escola;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.br.cefops.cefopsBD.converter.AlunoConverter;
@@ -15,8 +16,6 @@ import com.br.cefops.cefopsBD.repository.GestaoEscolar.AlunoRepository;
 public class AlunoServices {
 	@Autowired
 	AlunoRepository repository;
-	@Autowired
-	AlunoConverter converter;
 	 
 	public AlunosVo creatAluno(AlunosVo alunos) {
 		
@@ -37,13 +36,10 @@ public class AlunoServices {
 	}
 	
 	public AlunosVo updateAluno(AlunosVo alunos) {
-		var entityAluno = converter.convertVOToEntity(alunos);
-	     	entityAluno.setName(alunos.getName());
-			entityAluno.setLastName(alunos.getLastName());
-			entityAluno.setEmail(alunos.getEmail());
-			entityAluno.setPhoto(alunos.getPhoto());
-			var vo = converter.convertEntityToVO(repository.save(entityAluno));
-			return vo;
+		var entity=DozerConvert.parseObject(alunos,AlunosData.class);
+		var vo=DozerConvert.parseObject(repository.save(entity),AlunosVo.class);
+
+					return vo;
 		
 	}
 	

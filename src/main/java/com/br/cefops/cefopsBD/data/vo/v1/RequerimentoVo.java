@@ -13,15 +13,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
 
-@Data
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonPropertyOrder({ "id", "aluno", "tipo","Status","AbertoEm","requerimento","Responsavel","Entregue","Concluido"})
-public class RequerimentoVo extends RepresentationModel<RequerimentoVo> implements Serializable {
-	private static final long serialVersionUID = 1L;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-	@Mapping("id")
+@Data
+@JsonPropertyOrder({ "id","tipo", "aluno","Status","AbertoEm","requerimento","Responsavel","Entregue","Concluido"})
+public class RequerimentoVo  implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@JsonProperty("id")
-	private long key;
+	private long id;
 	private Date Entregue;
 	private AlunosData aluno;
 	private Date AbertoEm;

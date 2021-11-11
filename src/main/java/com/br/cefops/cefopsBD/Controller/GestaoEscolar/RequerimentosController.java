@@ -32,7 +32,7 @@ public class RequerimentosController {
 	@ResponseBody
 	@PostMapping
 	public ResponseEntity<RequerimentoVo> novoRequerimento(@RequestBody RequerimentoVo requerimento) {
-		RequerimentoVo optRequerimento = service.buscarRequerimentoId(requerimento.getKey());
+		RequerimentoVo optRequerimento = service.buscarRequerimentoId(requerimento.getId());
 		if (optRequerimento.equals(null))
 			return ResponseEntity.noContent().build();
 		service.novoRequerimento(optRequerimento);

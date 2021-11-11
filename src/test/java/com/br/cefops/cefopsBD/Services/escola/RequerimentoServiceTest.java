@@ -38,7 +38,7 @@ class RequerimentoServiceTest {
     void buscarRequerimentoId() {
         var requerimento=service.buscarRequerimentoId( 1L);
         System.out.println(requerimento);
-        assertEquals(0,requerimento.getKey());
+        assertEquals(0,requerimento.getId());
         assertEquals("Geremias",requerimento.getResponsavel());
                 ;
     }

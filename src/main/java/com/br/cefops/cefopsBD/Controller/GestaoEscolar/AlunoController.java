@@ -39,7 +39,6 @@ public class AlunoController {
 	@GetMapping(produces = { "application/json"})
 	public List<AlunosVo> obterAlunos() {
 		List<AlunosVo> alunos = serviceAlunoServices.findAlunos();
-		alunos.stream().forEach(p -> p.add(linkTo(methodOn(AlunoController.class).obterAlunosid(p.getKey() )).withSelfRel()));
 		return alunos;
 	}
 
@@ -54,7 +53,7 @@ public class AlunoController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<AlunosData> obterAlunosid(@PathVariable("id") String id) {
 		AlunosVo alunosVo=serviceAlunoServices.findAlunosID(id);
-		if (!alunosVo.getKey().isEmpty()){
+		if (!alunosVo.getId().isEmpty()){
 			return ResponseEntity.ok().body(DozerConvert.parseObject(alunosVo,AlunosData.class));
 
 		}
