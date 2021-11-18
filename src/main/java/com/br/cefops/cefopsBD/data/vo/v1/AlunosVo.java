@@ -18,13 +18,14 @@ import com.github.dozermapper.core.Mapping;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonPropertyOrder({ "id", "name", "lastName","cpf","dataNanscimento","email","teleFone","teleFoneCelular" ,"photo","enabled","requerimentos","endereco","documentos"})
 @Data
-public class AlunosVo  implements Serializable  {
+public class AlunosVo extends RepresentationModel<AlunosVo> implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 	
 	
-
-	private String id;
+	@Mapping("Id")
+	@JsonProperty("id")
+	private String key;
 	private String Name;
 	private	Date dataNanscimento;
 	private	String LastName;

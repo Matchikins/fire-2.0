@@ -19,8 +19,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Endpoint finanças Interna",description = "EndPoint Responsavel Por Controlar o As Finanças internas")
 @RestController
-@CrossOrigin
-@PreAuthorize("hasRole('ROLE_Financeiro')")
 @RequestMapping("/api/v1/financa/interna")
 public class FinanciaInterController {
 	

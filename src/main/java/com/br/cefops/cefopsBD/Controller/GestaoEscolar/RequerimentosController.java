@@ -1,6 +1,8 @@
 package com.br.cefops.cefopsBD.Controller.GestaoEscolar;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.br.cefops.cefopsBD.Services.escola.RequerimentoService;
@@ -36,12 +38,15 @@ public class RequerimentosController {
 		if (optRequerimento.equals(null))
 			return ResponseEntity.noContent().build();
 		service.novoRequerimento(optRequerimento);
-		return ResponseEntity.status(HttpStatus.CREATED).body(requerimento);
+
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(service.dadosFiltrados(requerimento));
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<RequerimentoVo> obterRequerimetosId(@PathVariable Long id) {
 		 RequerimentoVo optRequerimento = service.buscarRequerimentoId(id);
+
 		if (optRequerimento.equals(null)) {
 			return ResponseEntity.noContent().build();
 		}
@@ -50,6 +55,8 @@ public class RequerimentosController {
 	@GetMapping()
 	public ResponseEntity<List<RequerimentoVo>> obterTodosRequerimentos() {
 		List<RequerimentoVo> requerimentos = service.buscarTodosRequerimentos();
+		Map<Object,Object>  model= new HashMap();
+
 		return ResponseEntity.ok(requerimentos);
 	}
 

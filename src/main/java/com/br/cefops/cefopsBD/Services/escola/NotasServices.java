@@ -13,15 +13,15 @@ public class NotasServices {
     NotasRepository repository;
 
 
-    public List<NotasAlunosData> FindAllNotesById(String id) {
+    public List<NotasAlunosData> EncontrarNotasPorID(String id) {
         return repository.findAllByAlunoId(id);
     }
 
-    public  NotasAlunosData SetScore(NotasAlunosData notas){
+    public  NotasAlunosData SetarNota(NotasAlunosData notas){
         return repository.save(notas);
     }
 
-    public  NotasAlunosData UpdateScrore(NotasAlunosData notas){
+    public  NotasAlunosData AtualizarNotas(NotasAlunosData notas){
          return   repository.save(notas);
 
     }

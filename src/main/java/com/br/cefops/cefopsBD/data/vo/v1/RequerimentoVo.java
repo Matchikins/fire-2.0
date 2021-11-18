@@ -24,6 +24,7 @@ public class RequerimentoVo  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@JsonProperty("id")
 	private long id;
+
 	private Date Entregue;
 	private AlunosData aluno;
 	private Date AbertoEm;
@@ -31,5 +32,6 @@ public class RequerimentoVo  implements Serializable {
 	private String Status;
 	private String Responsavel;
 	private TiposRequerimentos tipo;
+
 
 }

@@ -10,7 +10,7 @@ public class AlunoConverter {
 		
 	public AlunosVo convertEntityToVO(AlunosData alunos) {
 			AlunosVo vo= new AlunosVo();
-			vo.setId(alunos.getId());
+			vo.setKey(alunos.getId());
 			vo.setName(alunos.getName());
 			vo.setLastName(alunos.getLastName());
 			vo.setPhoto(alunos.getPhoto());
@@ -21,7 +21,7 @@ public class AlunoConverter {
 		}
 	public AlunosData  convertVOToEntity(AlunosVo alunosVo) {
 		AlunosData entityAlunos= new AlunosData();
-		entityAlunos.setId(alunosVo.getId());
+		entityAlunos.setId(alunosVo.getKey());
 		entityAlunos.setName(alunosVo.getName());
 		entityAlunos.setLastName(alunosVo.getLastName());
 		entityAlunos.setPhoto(alunosVo.getPhoto());

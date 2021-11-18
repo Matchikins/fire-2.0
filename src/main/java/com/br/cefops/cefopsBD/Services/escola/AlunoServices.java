@@ -3,6 +3,8 @@ package com.br.cefops.cefopsBD.Services.escola;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +24,21 @@ public class AlunoServices {
 		return alunos;
 		
 	}
-	public List<AlunosVo> findAlunos() {
-		return DozerConvert.parseListObjects(repository.findAll(), AlunosVo.class);
+	public Page<AlunosVo> findAlunosByName(String name,Pageable pageable) {
+		var page=repository.findByName(name,pageable);
+		return page.map(this :: converterToAlunosVo);
+
+	}
+	public Page<AlunosVo> findAlunos(Pageable pageable) {
+		var page=repository.findAll(pageable);
+		return page.map(this :: converterToAlunosVo);
 		
 	}
+	private AlunosVo converterToAlunosVo(AlunosData entity){
+
+		return DozerConvert.parseObject(entity, AlunosVo.class);
+	}
+
 	public AlunosVo findAlunosID(String id) {
 		var entity = repository.findById(id).orElseThrow(()->
 		new ResourceNotFoundException("Não Encontramos Nehum Aluno Com esta ID"));

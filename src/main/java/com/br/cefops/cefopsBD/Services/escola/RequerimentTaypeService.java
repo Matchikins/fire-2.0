@@ -16,19 +16,19 @@ public class RequerimentTaypeService {
 	RequerimentTypeRepository repository;
 	
 	
-	public List<RequerimentsTypysVo> FindAllRequerimentsType() {
+	public List<RequerimentsTypysVo> EncontrarTodosTiposRequerimentos() {
 	
 		return DozerConvert.parseListObjects(repository.findAll(), RequerimentsTypysVo.class);
 	}
 	
-	public RequerimentsTypysVo CreateRequerimentType(RequerimentsTypysVo requeriment) {
+	public RequerimentsTypysVo CriarTopoRequerimento(RequerimentsTypysVo requeriment) {
 		var entity=DozerConvert.parseObject(requeriment, TiposRequerimentos.class);
 		var vo=DozerConvert.parseObject(repository.save(entity), RequerimentsTypysVo.class);
 		return vo;
 		
 	}
 	
-	public RequerimentsTypysVo updateRequerimentsTypys(RequerimentsTypysVo requeriment) {
+	public RequerimentsTypysVo AtualizarTipoRequerimento(RequerimentsTypysVo requeriment) {
 		
 		return null;
 		

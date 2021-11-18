@@ -18,7 +18,7 @@ public class NotasController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<List<NotasAlunosData>> obterNotasId(@PathVariable("id") String id) {
-        List<NotasAlunosData> notas=service.FindAllNotesById(id);
+        List<NotasAlunosData> notas=service.EncontrarNotasPorID(id);
             if (!notas.isEmpty()){
                 return ResponseEntity.ok().body(notas);
             }
@@ -26,13 +26,13 @@ public class NotasController {
         }
         @PutMapping(value = "/id")
         public NotasAlunosData alterarNota(@PathVariable String id, @RequestBody NotasAlunosData nota) {
-            NotasAlunosData notas =service.SetScore(nota);
+            NotasAlunosData notas =service.SetarNota(nota);
             return notas;
 
         }
     @PostMapping(consumes = "application/json")
     public NotasAlunosData novaNota(@RequestBody NotasAlunosData nota) {
-        NotasAlunosData notas=service.SetScore(nota);
+        NotasAlunosData notas=service.SetarNota(nota);
         return notas;
     }
 }

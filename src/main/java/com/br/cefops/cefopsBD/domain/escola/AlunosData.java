@@ -12,7 +12,7 @@ import com.br.cefops.cefopsBD.domain.escola.Requerimentos.Requerimentos;
 import com.br.cefops.cefopsBD.domain.seguranca.User;
 import com.br.cefops.cefopsBD.domain.escola.Documentos.DocumentosData;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.hibernate.annotations.CreationTimestamp;
 
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -23,7 +23,7 @@ public class AlunosData implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	@Id 
 	private String Id;
-	private String Name;
+	private String name;
 	private Date dataNanscimento;
 	private String LastName;
 	private	String Nacionalidade;
@@ -49,6 +49,9 @@ public class AlunosData implements Serializable  {
 	private List<CursoData> cursosId;
 	@OneToOne(mappedBy = "alunosId",cascade = CascadeType.REMOVE)
 	private DocumentosData documentos;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datacadastro;
 
 	public DocumentosData getDocumentos() {
 		return documentos;
@@ -75,11 +78,11 @@ public class AlunosData implements Serializable  {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public Date getDataNanscimento() {
@@ -170,9 +173,6 @@ public class AlunosData implements Serializable  {
 		this.endereço = endereço;
 	}
 
-	public List<Requerimentos> getRequerimentos() {
-		return requerimentos;
-	}
 
 	public void setRequerimentos(List<Requerimentos> requerimentos) {
 		this.requerimentos = requerimentos;
@@ -197,11 +197,19 @@ public class AlunosData implements Serializable  {
 		if (this == o) return true;
 		if (!(o instanceof AlunosData)) return false;
 		AlunosData that = (AlunosData) o;
-		return Objects.equals(Id, that.Id) && Objects.equals(Name, that.Name) && Objects.equals(dataNanscimento, that.dataNanscimento) && Objects.equals(LastName, that.LastName) && Objects.equals(Nacionalidade, that.Nacionalidade) && Objects.equals(Email, that.Email) && Objects.equals(sexo, that.sexo) && Objects.equals(cpf, that.cpf) && Objects.equals(estadoCivil, that.estadoCivil) && Objects.equals(TeleFoneCelular, that.TeleFoneCelular) && Objects.equals(TeleFone, that.TeleFone) && Objects.equals(enabled, that.enabled) && Objects.equals(photo, that.photo) && Objects.equals(endereço, that.endereço) && Objects.equals(requerimentos, that.requerimentos) && Objects.equals(user, that.user) && Objects.equals(cursosId, that.cursosId);
+		return Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(dataNanscimento, that.dataNanscimento) && Objects.equals(LastName, that.LastName) && Objects.equals(Nacionalidade, that.Nacionalidade) && Objects.equals(Email, that.Email) && Objects.equals(sexo, that.sexo) && Objects.equals(cpf, that.cpf) && Objects.equals(estadoCivil, that.estadoCivil) && Objects.equals(TeleFoneCelular, that.TeleFoneCelular) && Objects.equals(TeleFone, that.TeleFone) && Objects.equals(enabled, that.enabled) && Objects.equals(photo, that.photo) && Objects.equals(endereço, that.endereço) && Objects.equals(requerimentos, that.requerimentos) && Objects.equals(user, that.user) && Objects.equals(cursosId, that.cursosId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id, Name, dataNanscimento, LastName, Nacionalidade, Email, sexo, cpf, estadoCivil, TeleFoneCelular, TeleFone, enabled, photo, endereço, requerimentos, user, cursosId);
+		return Objects.hash(Id, name, dataNanscimento, LastName, Nacionalidade, Email, sexo, cpf, estadoCivil, TeleFoneCelular, TeleFone, enabled, photo, endereço, requerimentos, user, cursosId);
+	}
+
+	public Date getDatacadastro() {
+		return datacadastro;
+	}
+
+	public void setDatacadastro(Date datacadastro) {
+		this.datacadastro = datacadastro;
 	}
 }

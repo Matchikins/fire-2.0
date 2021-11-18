@@ -19,6 +19,7 @@ public class RequerimentoService {
         var requerimentos= DozerConvert.parseListObjects(
                 repository.findAll(),
                 RequerimentoVo.class);
+        List<RequerimentoVo> req=requerimentos;
         return  requerimentos;
     }
 
@@ -50,5 +51,16 @@ public class RequerimentoService {
             repository.deleteById(id);
             ResponseEntity.ok();
         }throw new ResourceNotFoundException("Registro não encontrado");
+    }
+
+    public RequerimentoVo dadosFiltrados(RequerimentoVo requerimento) {
+        requerimento.getId();
+        requerimento.getAluno().getId();
+        requerimento.getAluno().getEmail();
+        requerimento.getAluno().getName();
+        requerimento.getAluno().getLastName();
+        requerimento.getAbertoEm();
+        requerimento.getConcluido();
+        return requerimento;
     }
 }

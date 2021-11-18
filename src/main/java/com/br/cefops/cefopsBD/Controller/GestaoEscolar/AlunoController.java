@@ -1,26 +1,22 @@
 package com.br.cefops.cefopsBD.Controller.GestaoEscolar;
-import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.br.cefops.cefopsBD.converter.DozerConvert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.br.cefops.cefopsBD.Services.escola.AlunoServices;
 import com.br.cefops.cefopsBD.data.vo.v1.AlunosVo;
 import com.br.cefops.cefopsBD.domain.escola.AlunosData;
-import com.br.cefops.cefopsBD.repository.GestaoEscolar.AlunoRepository;
-import com.br.cefops.cefopsBD.repository.GestaoEscolar.RequerimentoRepository;
+
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -28,20 +24,54 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api/v1/alunos")
 public class AlunoController {
-	
-	@Autowired
-	AlunoRepository alunointerface;
-	@Autowired
-    RequerimentoRepository requerimento;
+
+
 	@Autowired
 	AlunoServices serviceAlunoServices;
 	
 	@GetMapping(produces = { "application/json"})
-	public List<AlunosVo> obterAlunos() {
-		List<AlunosVo> alunos = serviceAlunoServices.findAlunos();
-		return alunos;
-	}
+public ResponseEntity  obterAlunos(
+		@RequestParam(value = "page",defaultValue = "0") int page,
+		@RequestParam(value = "limit",defaultValue = "15") int limit,
+		@RequestParam(value = "direction",defaultValue = "asc") String direction) {
+		var sortDirection="desc".equalsIgnoreCase(direction)
+				? Sort.Direction.DESC
+				: Sort.Direction.ASC;
+		Pageable pageable= PageRequest.of(page, limit,Sort.by(sortDirection,"Name"));
 
+		Page<AlunosVo> alunos = serviceAlunoServices.findAlunos(pageable);
+
+		alunos.stream().forEach(aluno -> aluno.add(linkTo(methodOn(AlunoController.class)
+				.obterAlunosid(aluno.getKey())).withSelfRel()));
+		return ResponseEntity.ok(alunos);
+	}
+	@GetMapping(value = "/buscarnome/{nome}",produces = { "application/json"})
+	public ResponseEntity  obterAlunosPorNome(
+			@PathVariable("nome") String nome,
+			@RequestParam(value = "page",defaultValue = "0") int page,
+			@RequestParam(value = "limit",defaultValue = "15") int limit,
+			@RequestParam(value = "direction",defaultValue = "asc") String direction) {
+		var sortDirection="desc".equalsIgnoreCase(direction)
+				? Sort.Direction.DESC
+				: Sort.Direction.ASC;
+		Pageable pageable= PageRequest.of(page, limit,Sort.by(sortDirection,"name"));
+
+		Page<AlunosVo> alunos = serviceAlunoServices.findAlunosByName(nome,pageable);
+
+		alunos.stream().forEach(aluno -> aluno.add(linkTo(methodOn(AlunoController.class)
+				.obterAlunosid(aluno.getKey())).withSelfRel()));
+		try {
+			if (alunos != null) {
+				return ResponseEntity.ok(alunos);
+
+			}
+
+		} catch (Exception e) {
+			return 	ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok("alunos") ;
+	}
 
 	@ResponseBody
 	@PostMapping(consumes = "application/json")
@@ -53,7 +83,7 @@ public class AlunoController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<AlunosData> obterAlunosid(@PathVariable("id") String id) {
 		AlunosVo alunosVo=serviceAlunoServices.findAlunosID(id);
-		if (!alunosVo.getId().isEmpty()){
+		if (!alunosVo.getKey().isEmpty()){
 			return ResponseEntity.ok().body(DozerConvert.parseObject(alunosVo,AlunosData.class));
 
 		}
@@ -78,8 +108,8 @@ public class AlunoController {
 
 	@PutMapping(value = "/v2/{id}")
 	public AlunosVo atualizarAlunos(@RequestBody AlunosVo aluno) {
-		AlunosVo alunosVo =serviceAlunoServices.updateAluno(aluno);
-		return alunosVo;
+		AlunosVo alunos =serviceAlunoServices.updateAluno(aluno);
+		return alunos;
 		
 	}
 //	@PatchMapping(value = "/{id}")
